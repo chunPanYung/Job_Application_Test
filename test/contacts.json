@@ -1,0 +1,30 @@
+{
+  "contacts":
+  [
+    { 
+      "name": "Alice Brown", 
+      "email": "None",
+      "phone": "1231112223"
+    },
+    { 
+      "name": "Bob Crown", 
+      "email": "bob@crowns.com",
+      "phone": "None"
+    },
+    { 
+      "name": "Carlos Drew", 
+      "email": "carl@drewess.com",
+      "phone": "3453334445"
+    },
+    { 
+      "name": "Doug Emerty", 
+      "email": "None",
+      "phone": "4564445556"
+    },
+    { 
+      "name": "Egan Fair", 
+      "email": "eg@fairness.com",
+      "phone": "5675556667"
+    }
+  ]
+}

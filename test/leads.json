@@ -1,0 +1,30 @@
+{
+  "leads":
+  [
+    { 
+      "name": "None", 
+      "email": "kevin@keith.com",
+      "phone": "None"
+    },
+    { 
+      "name": "Lucy", 
+      "email": "lucy@liu.com",
+      "phone": "3210001112"
+    },
+    { 
+      "name": "Mary Middle", 
+      "email": "mary@middle.com",
+      "phone": "3331112223"
+    },
+    { 
+      "name": "None", 
+      "email": "None",
+      "phone": "4442223334"
+    },
+    { 
+      "name": "None", 
+      "email": "ole@olson.com",
+      "phone": "None"
+    }
+  ]
+}
