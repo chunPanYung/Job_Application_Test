@@ -6,7 +6,7 @@ only one of them need to be non-empty.
 class Lead():
     """ all variables can be set to new one, if it's not None value """
 
-    def __init__(self, name: str = None, email: str = None, phone: int = None):
+    def __init__(self, name: str, email: str, phone: int):
         self.name = name
         self.email = email
         self.phone = phone

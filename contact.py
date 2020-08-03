@@ -15,7 +15,7 @@ class Contact(Lead):
         should not be updated
     """
 
-    def __init__(self, name: str, email: str = None, phone: int = None):
+    def __init__(self, name: str, email: str, phone: int):
         self.name = name
         self.email = email
         self.phone = phone

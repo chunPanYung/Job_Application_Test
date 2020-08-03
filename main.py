@@ -10,7 +10,7 @@ from lead import Lead
 from contact import Contact
 
 
-def data_filter(data: dict) -> dict:
+def _data_filter(data: dict) -> dict:
     """
         data validation
         change the data into None datatype if the string is 'None'
@@ -35,16 +35,16 @@ def data_filter(data: dict) -> dict:
     return new_data
 
 
-def to_string(lst: List[dict]) -> bool:
+def _to_string(data: List):
     """
-    print the variables of every class in list
+    Call the to_string() method for each class in list
     """
-    for node in lst:
+    for node in data:
         node.to_string()
 
 
-def filter_registrant(contact: List[Contact], lead: List[Lead],
-                      registrant: List):
+def _filter_registrant(contact: List[Contact], lead: List[Lead],
+                       registrant: List) -> None:
     """
     1) Check to see if registrant's phone or email matche contact list,
        update with new info if it doesn't exists.
@@ -55,7 +55,7 @@ def filter_registrant(contact: List[Contact], lead: List[Lead],
     """
     # cycle through each node in registrant list
     for node_reg in registrant:
-        filtered = data_filter(node_reg)
+        filtered = _data_filter(node_reg)
         added: bool = False
         # check with contact list first
         for node_contact in contact:
@@ -88,16 +88,22 @@ def filter_registrant(contact: List[Contact], lead: List[Lead],
                 node_lead.set_email(filtered['email'])
                 node_lead.set_phone(filtered['phone'])
                 # append it into contact list and remove them from lead list
-                contact.append(node_lead)
-                lead.remove(node_lead)
-                added = True
+                # only if they have name variable
+                if node_lead.get_name() is not None:
+                    contact.append(node_lead)
+                    lead.remove(node_lead)
+                    added = True
         # if added: bool is still False here, it means it doesn't find match
         # in both lead and contact list.  Add them directly into contact list
-        if not added:
+        # if name is not None
+        if not added and filtered['name'] is not None:
             contact.append(Contact(filtered['name'],
                                    filtered['email'],
                                    filtered['phone']))
-
+        elif not added:
+            lead.append(Lead(filtered['name'],
+                             filtered['email'],
+                             filtered['phone']))
 
 
 def main():
@@ -106,8 +112,8 @@ def main():
         sys.exit('Please provide .json file')
 
     # empty contact list and lead list
-    contactsList: List[Contact] = []
-    leadsList: List[Lead] = []
+    contacts_list: List[Contact] = []
+    leads_list: List[Lead] = []
 
     # open all .json files
     for arg in sys.argv[1:]:
@@ -116,35 +122,35 @@ def main():
             # put it in contact list if it's contact data
             if 'contacts' in data:
                 # loop through every single data in the list,
-                # put them into contactsList
+                # put them into contacts_list
                 for node in data['contacts']:
                     # filter the data
-                    filtered: dict = data_filter(node)
-                    contactsList.append(Contact(filtered['name'],
-                                                filtered['email'],
-                                                filtered['phone']))
+                    filtered: dict = _data_filter(node)
+                    contacts_list.append(Contact(filtered['name'],
+                                                 filtered['email'],
+                                                 filtered['phone']))
             # put it in lead list if it's lead data
             if 'leads' in data:
                 # loop through every single data in the list,
-                # put them into contactsList
+                # put them into contacts_list
                 for node in data['leads']:
                     # filter the data
-                    filtered: dict = data_filter(node)
-                    leadsList.append(Lead(filtered['name'],
-                                          filtered['email'],
-                                          filtered['phone']))
+                    filtered: dict = _data_filter(node)
+                    leads_list.append(Lead(filtered['name'],
+                                           filtered['email'],
+                                           filtered['phone']))
             # filter data in registrants .json
             if 'registrants' in data:
-                filter_registrant(contactsList, leadsList, data['registrants'])
-
+                _filter_registrant(contacts_list, leads_list,
+                                   data['registrants'])
 
     # end of for loops
     print('===CONTACT LIST===')
-    to_string(contactsList)
+    _to_string(contacts_list)
     print('===LEADS LIST===')
-    to_string(leadsList)
+    _to_string(leads_list)
 
 
-
+# Execute the main function
 if __name__ == '__main__':
     main()
