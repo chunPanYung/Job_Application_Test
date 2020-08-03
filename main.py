@@ -95,8 +95,9 @@ def _filter_registrant(contact: List[Contact], lead: List[Lead],
                     added = True
         # if added: bool is still False here, it means it doesn't find match
         # in both lead and contact list.  Add them directly into contact list
-        # if name is not None
-        if not added and filtered['name'] is not None:
+        # if name is not None, and phone or email is not empty
+        if not added and filtered['name'] is not None and \
+           (filtered['email'] or filtered['phone']):
             contact.append(Contact(filtered['name'],
                                    filtered['email'],
                                    filtered['phone']))
