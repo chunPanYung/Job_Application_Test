@@ -4,6 +4,7 @@ It consists of name, email, and phone variables,
 only one of them need to be non-empty.
 """
 class Lead():
+    """ all variables can be set to new one, if it's not None value """
 
     def __init__(self, name: str = None, email: str = None, phone: int = None):
         self.name = name
@@ -22,37 +23,22 @@ class Lead():
         """ return phone """
         return self.phone
 
-    def set_name(self, name: str) -> bool:
-        """ set only if it's empty.
-            return true if it's set,
-            return false if class variable already has value
-        """
-        if not self.name:
+    def set_name(self, name: str):
+        """ set only if value is not None """
+        if name is not None:
             self.name = name
-            return True
-        return False
 
-    def set_email(self, email: str) -> bool:
-        """ set only if it's empty.
-            return true if it's set,
-            return false if class variable already has value
-        """
-        if not self.email:
+    def set_email(self, email: str):
+        """ set only if value is not None """
+        if email is not None:
             self.email = email
-            return True
-        return False
 
-    def set_phone(self, phone: str) -> bool:
-        """ set only if it's empty.
-            return true if it's set,
-            return false if class variable already has value. 
-        """
-        if not self.phone:
+    def set_phone(self, phone: str):
+        """ set only if value is not None """
+        if phone is not None:
             self.phone = phone
-            return True
-        return False
 
-    def to_string(self) -> bool:
+    def to_string(self):
         """
         print string of all variables
         """
